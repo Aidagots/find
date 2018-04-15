@@ -1,19 +1,17 @@
 package Main;
 
-import java.io.File;
-import java.util.Objects;
-
 public class find {
+
     public static void main(String[] args){
         new find().start(args);
     }
 
-    public void start(String[] args){
+    private void start(String[] args){
         boolean r = false;
         boolean d = false;
-        String namedir = null;
+        String namedir = "find//out//artifacts//find_jar//";
         String namefile = null;
-        boolean count = false ;
+
         for (int i = 1 ; i < args.length ; i++){
             if ("-r".equals(args[i])){
                 r = true;
@@ -28,51 +26,12 @@ public class find {
         }
 
         if (d) {
-            String s;
-            File dir = new File(namedir);
-            if(dir.isDirectory()){
-                for(File item : Objects.requireNonNull(dir.listFiles())){
-                    if (!item.isDirectory() && (item.getName()).equals(namefile)){
-                        System.out.print(item.getName());
-                        count = true;
-                    }
-                }
-            }
+            DopFind.d(namedir , namefile);
         }
 
-        if (r&&!count) {
-            String str;
-            assert namedir != null;
-            File dir = new File(namedir);
-
-            if(dir.isDirectory()){
-                for(File item : Objects.requireNonNull(dir.listFiles())){
-                    if (item.isDirectory()) {
-                        str = namedir + "//" + item.getName();
-                        searchpodDir(str , namefile);
-                    }
-                }
-
-            }
+        if (r) {
+            DopFind.r(namedir , namefile);
         }
 
-
-
-    }
-
-
-    private void searchpodDir(String str , String filename) {
-        File dir = new File(str);
-        for (File item : Objects.requireNonNull(dir.listFiles())) {
-            if (item.isDirectory()){
-                String l = str + "//" + item.getName();
-                searchpodDir(l , filename);
-            } else {
-                if(item.getName().equals(filename)){
-                    System.out.print(item.getName());
-                    break;
-                }
-            }
-        }
     }
 }
