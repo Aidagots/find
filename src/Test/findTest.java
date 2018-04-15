@@ -28,13 +28,13 @@ class findTest {
 
     @org.junit.jupiter.api.Test
     void findcTest() {
-        String[] arg = {"find", "-d" , "C://Users//user//IdeaProjects//find//", "pls.txt"};
+        String[] arg = {"find", "-d" , "file//", "log.txt"};
         find.main(arg);
         assertFileContent("file/log.txt" , "pls.txt");
-        String[] arg1 = {"find", "-r" , "-d" , "C://Users//user//IdeaProjects//find//", "hof.txt"};
+        String[] arg1 = {"find", "-r" , "-d" , "Aida//", "hof.txt"};
         find.main(arg1);
         assertFileContent("file/log.txt" , "hof.txt");
-        String[] arg2 = {"find", "-d" , "C://Users//user//IdeaProjects//find//Aida", "rov.txt"};
+        String[] arg2 = {"find", "-d" , "Aida//", "rov.txt"};
         find.main(arg2);
         assertFileContent("file/log.txt" , "rov.txt");
     }
