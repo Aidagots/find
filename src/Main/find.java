@@ -9,7 +9,7 @@ public class find {
     private void start(String[] args){
         boolean r = false;
         boolean d = false;
-        String namedir = "find//out//artifacts//find_jar//";
+        String namedir = "out//artifacts//find_jar//";
         String namefile = null;
 
         for (int i = 1 ; i < args.length ; i++){
