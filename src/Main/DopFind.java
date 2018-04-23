@@ -2,30 +2,26 @@ package Main;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class DopFind {
-    private static void searchpodDir(String str, String filename) {
-        File dir = new File(str);
-        for (File item : Objects.requireNonNull(dir.listFiles())) {
+    static ArrayList<String> list = new ArrayList<String>();
+
+    private static void searchpodDir(File file, String filename) {
+        for (File item : Objects.requireNonNull(file.listFiles())) {
             if (item.isDirectory()) {
-                String l = str + "//" + item.getName();
-                searchpodDir(l, filename);
+                searchpodDir(item, filename);
             } else {
                 if (item.getName().equals(filename)) {
                     System.out.print(item.getName());
-                    try {
-                        FileWriter write = new FileWriter("file/log.txt");
-                        write.append(item.getName());
-                        write.close();
-                    } catch (Exception e) {
-                        System.out.print(e.toString());
-                    }
-                    break;
+                    list.add(item.getName());
                 }
             }
         }
     }
+
+
 
     public static void d(String namedir, String namefile){
         File dir = new File(namedir);
@@ -33,14 +29,7 @@ public class DopFind {
             for(File item : Objects.requireNonNull(dir.listFiles())){
                 if (!item.isDirectory() && (item.getName()).equals(namefile)){
                     System.out.print(item.getName());
-                    try {
-                        FileWriter write = new FileWriter("file/log.txt");
-                        write.append(item.getName());
-                        write.close();
-                    } catch (Exception e) {
-                        System.out.print(e.toString());
-                    }
-                    break;
+                    list.add(item.getName());
                 }
             }
         }
@@ -54,21 +43,17 @@ public class DopFind {
         if(dir.isDirectory()){
             for(File item : Objects.requireNonNull(dir.listFiles())){
                 if (item.isDirectory()) {
-                    str = namedir + "//" + item.getName();
-                    searchpodDir(str , namefile);
+                    searchpodDir(item, namefile);
                 }else if((item.getName()).equals(namefile)){
                     System.out.print(item.getName());
-                    try {
-                        FileWriter write = new FileWriter("file/log.txt");
-                        write.append(item.getName());
-                        write.close();
-                    } catch (Exception e) {
-                        System.out.print(e.toString());
-                    }
-                    break;
                 }
             }
 
         }
+    }
+
+
+    public static ArrayList<String> getFile() {
+        return list;
     }
 }
