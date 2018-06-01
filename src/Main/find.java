@@ -10,7 +10,7 @@ public class find {
 
     private void start(String[] args) {
         boolean r = false;
-        boolean d = false;
+        boolean d = true;
         String namefile = null;
 
         File f = new File("");
@@ -21,7 +21,6 @@ public class find {
                 r = true;
             }
             if ("-d".equals(args[i])) {
-                d = true;
                 namedir = args[i + 1];
             }
             if (!("-r".equals(args[i])) && !("-d".equals(args[i])) && !("-d".equals(args[i - 1]))) {
@@ -30,10 +29,7 @@ public class find {
         }
 
 
-        DopFind.d(namedir, namefile);
-
-        if (r) {
-            DopFind.r(namedir, namefile);
-        }
+        DopFind.search(namedir, namefile, d, r);
+        System.out.print(DopFind.getFile());
     }
 }

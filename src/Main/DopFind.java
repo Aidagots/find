@@ -6,46 +6,31 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class DopFind {
-    static ArrayList<String> list = new ArrayList<String>();
+    private static ArrayList<String> list = new ArrayList<String>();
 
-    private static void searchpodDir(File file, String filename) {
+    private static void searchInDir(File file, String filename) {
         for (File item : Objects.requireNonNull(file.listFiles())) {
             if (item.isDirectory()) {
-                searchpodDir(item, filename);
+                searchInDir(item, filename);
             } else {
                 if (item.getName().equals(filename)) {
-                    System.out.print(item.getName());
                     list.add(item.getName());
                 }
             }
         }
     }
 
-
-
-    public static void d(String namedir, String namefile){
-        File dir = new File(namedir);
-        if(dir.isDirectory()){
-            for(File item : Objects.requireNonNull(dir.listFiles())){
-                if (!item.isDirectory() && (item.getName()).equals(namefile)){
-                    System.out.print(item.getName());
-                    list.add(item.getName());
-                }
-            }
-        }
-    }
-
-    public static void r(String namedir, String namefile){
-        String str;
+    public static void search(String namedir, String namefile, boolean d, boolean r) {
         assert namedir != null;
         File dir = new File(namedir);
 
-        if(dir.isDirectory()){
-            for(File item : Objects.requireNonNull(dir.listFiles())){
-                if (item.isDirectory()) {
-                    searchpodDir(item, namefile);
-                }else if((item.getName()).equals(namefile)){
-                    System.out.print(item.getName());
+        if (dir.isDirectory()) {
+            for (File item : Objects.requireNonNull(dir.listFiles())) {
+                if ((!item.isDirectory() && (item.getName()).equals(namefile)) && d) {
+                    list.add(item.getName());
+                }
+                if (item.isDirectory() && r) {
+                    searchInDir(item, namefile);
                 }
             }
 
@@ -57,3 +42,5 @@ public class DopFind {
         return list;
     }
 }
+
+
